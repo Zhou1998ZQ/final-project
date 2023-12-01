@@ -22,7 +22,6 @@ public class Order {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
     @Column(name = "order_state")
     private OrderState orderState;
 
