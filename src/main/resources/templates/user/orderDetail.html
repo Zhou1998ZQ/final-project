@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Order Detail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h2>Show Order Detail</h2>
+
+<p>User ID: <span th:text="${userId}"></span></p>
+
+<h3>Items:</h3>
+<ul class="list-group">
+    <li th:each="item : ${items}" class="list-group-item">
+        <p th:text="${item.itemName}"></p>
+    </li>
+</ul>
+
+<a class="btn btn-secondary mt-3" th:href="'/users/detail/' + ${userId}">Back to User Detail</a>
+
+</body>
+</html>
