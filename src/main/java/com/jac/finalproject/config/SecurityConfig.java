@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .formLogin(form ->
                         form.loginPage("/showMyLoginPage")
                                 .loginProcessingUrl("/authenticateTheUser")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/users",true)
                                 .permitAll()
                 )
                 .exceptionHandling(configurer -> configurer.accessDeniedPage("/user/access-denied"))

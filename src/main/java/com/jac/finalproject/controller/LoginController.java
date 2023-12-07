@@ -35,7 +35,11 @@ public class LoginController {
         return "user/login";
     }
 
-
+    @GetMapping("/user/access-denied")
+    public String accessDenied(Model model) {
+        model.addAttribute("user", new User());
+        return "user/access-denied";
+    }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
