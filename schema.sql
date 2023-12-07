@@ -43,11 +43,11 @@ CREATE TABLE `jac_order` (
                              PRIMARY KEY (`id`),
                              KEY `FK8y7m5sokph3f2gws7r9t0pu` (`user_id`),
                              CONSTRAINT `FK8y7m5sokph3f2gws7r9t0pu` FOREIGN KEY (`user_id`) REFERENCES `jac_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `jac_order` */
 
-insert  into `jac_order`(`id`,`create_time`,`order_state`,`user_id`) values (2,'2023-11-22 19:25:11.000000','PAID',8),(3,'2023-11-29 19:25:27.000000','UNPAID',8),(4,'2023-11-23 19:25:41.000000','UNPAID',1),(5,'2023-11-16 19:25:52.000000','PAID',2),(6,'2023-11-26 19:26:01.000000','UNPAID',1),(7,'2023-11-21 19:26:11.000000','UNPAID',3),(8,'2023-11-22 19:26:23.000000','PAID',4),(9,'2023-11-25 19:26:31.000000','UNPAID',4),(10,'2023-11-17 19:26:38.000000','UNPAID',5),(11,'2023-11-29 19:26:46.000000','PAID',6),(12,'2023-11-30 19:26:54.000000','PAID',7),(13,'2023-11-26 19:27:03.000000','UNPAID',9),(14,'2023-11-18 19:27:13.000000','PAID',10);
+insert  into `jac_order`(`id`,`create_time`,`order_state`,`user_id`) values (14,'2023-11-18 19:27:13.000000','PAID',38),(15,'2023-11-30 21:17:42.000000','UNPAID',37),(16,'2023-11-30 21:22:03.000000','UNPAID',37);
 
 /*Table structure for table `jac_order_item` */
 
@@ -64,7 +64,21 @@ CREATE TABLE `jac_order_item` (
 
 /*Data for the table `jac_order_item` */
 
-insert  into `jac_order_item`(`order_id`,`item_id`) values (2,1),(2,1),(3,6),(4,2),(2,1),(5,2),(5,3),(6,1),(6,4),(7,1),(7,5),(8,1),(9,1),(10,2),(11,3),(11,4),(12,1),(13,1),(14,1),(14,5),(14,6);
+insert  into `jac_order_item`(`order_id`,`item_id`) values (14,1),(14,5),(14,6),(15,1),(15,6),(16,2),(16,5);
+
+/*Table structure for table `jac_role` */
+
+DROP TABLE IF EXISTS `jac_role`;
+
+CREATE TABLE `jac_role` (
+                            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                            `role_name` varchar(255) DEFAULT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `jac_role` */
+
+insert  into `jac_role`(`id`,`role_name`) values (1,'ROLE_ADMIN'),(2,'ROLE_CLIENT');
 
 /*Table structure for table `jac_user` */
 
@@ -75,12 +89,14 @@ CREATE TABLE `jac_user` (
                             `email` varchar(255) DEFAULT NULL,
                             `registration_time` datetime(6) DEFAULT NULL,
                             `user_name` varchar(255) DEFAULT NULL,
+                            `password` varchar(255) DEFAULT NULL,
+                            `enabled` bit(1) DEFAULT NULL,
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `jac_user` */
 
-insert  into `jac_user`(`id`,`email`,`registration_time`,`user_name`) values (1,'alice.smith@email.com','2023-11-22 21:00:00.000000','Alice Smith'),(2,'bob.jones@email.com','2023-11-25 21:15:00.000000','Bob Jones'),(3,'charlie.davis@email.com','2023-11-03 21:30:00.000000','Charlie Davis'),(4,'diana.miller@email.com','2023-11-09 21:45:00.000000','Diana Miller'),(5,'eric.wilson@email.com','2023-11-03 22:00:00.000000','Eric Wilson'),(6,'fiona.anderson@email.com','2023-11-04 22:15:00.000000','Fiona Anderson'),(7,'george.wright@email.com','2023-11-13 22:30:00.000000','George Wright'),(8,'helen.thompson@email.com','2023-11-01 22:45:00.000000','Helen Thompson'),(9,'jac1234@gmail.com','2023-11-20 19:13:11.000000','John Abbott'),(10,'ian.hall@email.com','2023-11-04 23:00:00.000000','Ian Hall'),(11,'jenny.baker@email.com','2023-11-29 23:15:00.000000','Jenny Baker');
+insert  into `jac_user`(`id`,`email`,`registration_time`,`user_name`,`password`,`enabled`) values (36,'332211@QQ.COM','2023-12-07 16:02:28.000000','332211','$2a$10$bpfbluGToybBWE5U0X2jM.2iiWt6WcmfLZoDs/O3QyG0g3c4QKrK6',''),(37,'999@QQ.COM','2023-12-07 16:08:15.000000','999','$2a$10$zkngsrg.OiJq9.dA9qs28uMpaga0qXt3W.FWtRO7SsW4HQuLuN2ZK',''),(38,'000@gg.com','2023-12-07 16:35:17.000000','000','$2a$10$XScFSFWWKCg3AiV2an5.oOS.9jzhJOST9SB5eqJTXPlF/I4x5cdg2',''),(39,'222@qq.com','2023-12-07 16:54:49.000000','222','$2a$10$6BG1ekTY6NUwMwAZxhPJlu/uvsUB9SJ6.BiJ.yZ7dUGq/MCe.nT3C','');
 
 /*Table structure for table `jac_user_payment_info` */
 
@@ -95,11 +111,28 @@ CREATE TABLE `jac_user_payment_info` (
                                          PRIMARY KEY (`id`),
                                          UNIQUE KEY `UK_3ilw3krxsy58nq1dntwsa75sq` (`user_id`),
                                          CONSTRAINT `FKaxulqepx57mpfmlxalqfwmg2o` FOREIGN KEY (`user_id`) REFERENCES `jac_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `jac_user_payment_info` */
 
-insert  into `jac_user_payment_info`(`id`,`credit_card_number`,`cvv_code`,`expiration_date`,`user_id`) values (5,'2222-1111-2222-1118','432','12/24',9),(6,'1234-5678-9012-3456','123','12/25',1),(7,'2345-6789-0123-4567','456','01/24',2),(8,'3456-7890-1234-5678','789','09/23',3),(9,'4567-8901-2345-6789','012','03/26',4),(10,'5678-9012-3456-7890','345','05/25',5),(11,'6789-0123-4567-8901','678','07/22',6),(12,'7890-1234-5678-9012','901','11/23',7),(13,'8901-2345-6789-0123','234','02/25',8);
+insert  into `jac_user_payment_info`(`id`,`credit_card_number`,`cvv_code`,`expiration_date`,`user_id`) values (14,'2222-2222-1111-1111','222','12/23',37);
+
+/*Table structure for table `jac_user_role` */
+
+DROP TABLE IF EXISTS `jac_user_role`;
+
+CREATE TABLE `jac_user_role` (
+                                 `user_id` bigint(20) NOT NULL,
+                                 `role_id` bigint(20) NOT NULL,
+                                 KEY `FKksmmh1x6jyj0xj8id74erjnsr` (`role_id`),
+                                 KEY `FKhlc0vpjdho3mtr30iqal8pc0w` (`user_id`),
+                                 CONSTRAINT `FKhlc0vpjdho3mtr30iqal8pc0w` FOREIGN KEY (`user_id`) REFERENCES `jac_user` (`id`),
+                                 CONSTRAINT `FKksmmh1x6jyj0xj8id74erjnsr` FOREIGN KEY (`role_id`) REFERENCES `jac_role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `jac_user_role` */
+
+insert  into `jac_user_role`(`user_id`,`role_id`) values (37,1),(38,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -10,6 +10,7 @@ import com.jac.finalproject.service.UserPaymentInfoService;
 import com.jac.finalproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,6 @@ public class UserController {
         this.userPaymentInfoService = userPaymentInfoService;
         this.orderService = orderService;
         this.itemService = itemService;
-
-
     }
 
     @GetMapping
@@ -69,6 +68,7 @@ public class UserController {
         return "redirect:/users";
     }
 
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/delete/{userId}")
     public String deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);

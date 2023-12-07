@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Date;
 import java.util.List;
@@ -26,9 +27,16 @@ public class User {
     @NotBlank
     private String userName;
 
+    @Column(name = "password")
+    @NotBlank
+    private String password;
+
     @Column(name = "email")
     @Email
     private String email;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,6 +49,13 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private UserPaymentInfo userPaymentInfo;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "jac_user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private List<Role> roles;
 
 
 }
